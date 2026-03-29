@@ -5,7 +5,7 @@ site:
   subtitle: "Daily and weekly AI briefings shaped around agent systems and AI engineering"
   language: "zh-CN"
   timezone: "Asia/Shanghai"
-  base_url: "https://example.com/ai-signal-briefing"
+  base_url: "https://chill-sjy.github.io/news"
 
 briefing:
   max_highlights_per_topic: 3
@@ -115,4 +115,3 @@ topics:
     day_of_week: monday
     why_it_matters: "作为行业背景层，帮助辨别热度是真需求还是短期噪音。"
     focus: "关注融资、生态合作、基础设施动向和 developer mindshare 的变化。"
-

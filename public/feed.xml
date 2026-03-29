@@ -2,15 +2,15 @@
 <rss version="2.0">
   <channel>
     <title>AI Signal Briefing</title>
-    <link>https://example.com/ai-signal-briefing/</link>
+    <link>https://chill-sjy.github.io/news/</link>
     <description>Daily and weekly AI briefings shaped around agent systems and AI engineering</description>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 29 Mar 2026 09:40:52 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 29 Mar 2026 10:37:18 +0000</lastBuildDate>
     
     <item>
       <title>AI Signal Briefing | 2026-03-29</title>
-      <link>https://example.com/ai-signal-briefing/reports/2026-03-29.html</link>
-      <guid>https://example.com/ai-signal-briefing/reports/2026-03-29.html</guid>
+      <link>https://chill-sjy.github.io/news/reports/2026-03-29.html</link>
+      <guid>https://chill-sjy.github.io/news/reports/2026-03-29.html</guid>
       <pubDate>Sun, 29 Mar 2026 00:00:00 +0000</pubDate>
       <description>今天还没有累计到足够的新发现，适合先看一级主题与高信号来源清单。</description>
     </item>
