@@ -1,0 +1,118 @@
+version: 1
+
+site:
+  title: "AI Signal Briefing"
+  subtitle: "Daily and weekly AI briefings shaped around agent systems and AI engineering"
+  language: "zh-CN"
+  timezone: "Asia/Shanghai"
+  base_url: "https://example.com/ai-signal-briefing"
+
+briefing:
+  max_highlights_per_topic: 3
+  max_reports_in_feed: 20
+  intro_note: "优先保留能帮助架构判断、技术选型和工程实践落地的内容。"
+
+levels:
+  L1:
+    label: "Level 1 - Core"
+    display_name: "一级：最相关的核心技术"
+    description: "只追踪与你最相关、技术门槛最高、最可能影响 agent 系统设计的内容。"
+  L2:
+    label: "Level 2 - Adjacent Technical"
+    display_name: "二级：AI 技术延展"
+    description: "保留 AI 技术实现与工程方案，但优先级低于核心 agent 主题。"
+  L3:
+    label: "Level 3 - Broader AI"
+    display_name: "三级：更广泛的 AI 资讯"
+    description: "行业动态、产品发布和广义趋势，主要用于补背景和发现新方向。"
+
+topics:
+  - id: l1-agent-architecture
+    level: L1
+    name: "Agent architecture patterns"
+    query: "agent architecture patterns"
+    cadence: daily
+    why_it_matters: "帮助判断 planner-executor、多 agent 协作、tool routing 和 state machine 等架构取舍。"
+    focus: "关注真实可复用的架构模式、失败案例、上下文管理和任务编排。"
+
+  - id: l1-agent-memory
+    level: L1
+    name: "Agent memory implementations"
+    query: "agent memory implementations"
+    cadence: daily
+    why_it_matters: "这会直接影响长任务稳定性、用户画像持续性和多轮上下文质量。"
+    focus: "关注 episodic memory、semantic memory、long-term retrieval、memory compaction 和 state persistence。"
+
+  - id: l1-omni-pipeline
+    level: L1
+    name: "Omni and multimodal inference pipelines"
+    query: "multimodal inference pipeline"
+    cadence: daily
+    why_it_matters: "关系到 omni 模型线管、音视频输入、实时流式处理和 tool use 的工程实现。"
+    focus: "关注多模态请求链路、流式推理、缓存、转码和吞吐优化。"
+
+  - id: l1-agent-evals
+    level: L1
+    name: "Agent evaluation frameworks"
+    query: "agent evaluation frameworks"
+    cadence: daily
+    why_it_matters: "评测直接决定我们是否真正知道 agent 的能力边界和质量退化。"
+    focus: "关注 task success metrics、harness design、benchmark drift、infra noise 和 regression detection。"
+
+  - id: l1-agent-reliability
+    level: L1
+    name: "Agent reliability observability and governance"
+    query: "agent reliability observability governance"
+    cadence: daily
+    why_it_matters: "这块决定 agent 服务能不能稳定上线，尤其是监控、审计、权限和回滚能力。"
+    focus: "关注 tracing、monitoring、guardrails、policy enforcement、tool failures 和 production incidents。"
+
+  - id: l2-ai-dev-tooling
+    level: L2
+    name: "AI developer tooling and repos"
+    query: "AI developer tooling GitHub trending"
+    cadence: weekdays
+    why_it_matters: "帮助发现新工具链、开源框架和工程实践热点。"
+    focus: "关注 developer tooling、agent frameworks、serving infra、eval tooling 和 devex improvements。"
+
+  - id: l2-ai-serving
+    level: L2
+    name: "AI serving and systems engineering"
+    query: "AI serving systems engineering"
+    cadence: weekdays
+    why_it_matters: "模型服务、推理加速和系统设计会影响你对平台能力和上线成本的判断。"
+    focus: "关注 inference serving、scheduler、batching、latency、GPU utilization 和 reliability tradeoffs。"
+
+  - id: l2-ai-product-engineering
+    level: L2
+    name: "Applied AI product engineering"
+    query: "AI product engineering best practices"
+    cadence: weekdays
+    why_it_matters: "用来补足真实产品团队如何把 AI 能力落进业务和交互。"
+    focus: "关注 product architecture、human-in-the-loop、UX patterns、cost controls 和 deployment stories。"
+
+  - id: l2-frontier-labs-engineering
+    level: L2
+    name: "Frontier lab engineering notes"
+    query: "Anthropic OpenAI engineering agents evals"
+    cadence: weekdays
+    why_it_matters: "大模型公司的一线工程博客经常包含高信号经验和设计复盘。"
+    focus: "关注 Anthropic、OpenAI 等官方工程与研究内容中的可迁移经验。"
+
+  - id: l3-ai-launches
+    level: L3
+    name: "AI launches and product news"
+    query: "AI launches product announcements"
+    cadence: weekdays
+    why_it_matters: "帮助你快速扫到值得深入研究的新模型、新工具和产品方向。"
+    focus: "关注模型发布、产品更新、生态变化和开发者反馈。"
+
+  - id: l3-ai-market
+    level: L3
+    name: "AI market and ecosystem signals"
+    query: "AI ecosystem startup funding market"
+    cadence: weekly
+    day_of_week: monday
+    why_it_matters: "作为行业背景层，帮助辨别热度是真需求还是短期噪音。"
+    focus: "关注融资、生态合作、基础设施动向和 developer mindshare 的变化。"
+

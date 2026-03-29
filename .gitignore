@@ -1,0 +1,9 @@
+.DS_Store
+.venv/
+.vendor/
+__pycache__/
+*.pyc
+data/last30days/research.db
+data/last30days/research.db-shm
+data/last30days/research.db-wal
+data/last30days/briefs/

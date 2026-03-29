@@ -1,0 +1,45 @@
+version: 1
+
+source_sets:
+  - id: l2-official-engineering
+    level: L2
+    label: "Official engineering and research sources"
+    sources:
+      - name: "Anthropic Engineering"
+        kind: website
+        url: "https://www.anthropic.com/engineering"
+        notes: "高信号 agent engineering、eval、Claude Code、long-running agents 相关文章。"
+      - name: "Anthropic Research"
+        kind: website
+        url: "https://www.anthropic.com/research"
+        notes: "适合补齐对 alignment、interpretability、agent autonomy 和科学应用的跟踪。"
+      - name: "OpenAI Research"
+        kind: website
+        url: "https://openai.com/research/"
+        notes: "用于追踪模型、评测、推理系统和产品能力演进。"
+      - name: "GitHub Trending"
+        kind: website
+        url: "https://github.com/trending"
+        notes: "适合发现新的 AI repo、infra 工具和 agent framework 热点。"
+      - name: "Hugging Face Daily Papers"
+        kind: website
+        url: "https://huggingface.co/papers"
+        notes: "用于补科研和技术趋势，不必每篇都读。"
+
+  - id: l3-broader-news
+    level: L3
+    label: "Broader AI news and ecosystem sources"
+    sources:
+      - name: "Anthropic News"
+        kind: website
+        url: "https://www.anthropic.com/news"
+        notes: "产品、合作、政策和生态更新。"
+      - name: "OpenAI News"
+        kind: website
+        url: "https://openai.com/news/"
+        notes: "官方产品与公司动态。"
+      - name: "GitHub Explore AI"
+        kind: website
+        url: "https://github.com/topics/artificial-intelligence"
+        notes: "适合发现更广义的 AI 项目和生态方向。"
+
