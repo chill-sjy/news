@@ -5,8 +5,15 @@
     <link>https://chill-sjy.github.io/news/</link>
     <description>Daily and weekly AI briefings shaped around agent systems and AI engineering</description>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 29 Mar 2026 10:37:18 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 30 Mar 2026 02:47:00 +0000</lastBuildDate>
     
+    <item>
+      <title>AI Signal Briefing | 2026-03-30</title>
+      <link>https://chill-sjy.github.io/news/reports/2026-03-30.html</link>
+      <guid>https://chill-sjy.github.io/news/reports/2026-03-30.html</guid>
+      <pubDate>Mon, 30 Mar 2026 00:00:00 +0000</pubDate>
+      <description>今日最强信号来自 Agent architecture patterns：42 Agent Architecture Patterns: From Skill Repos to Intent &amp;amp; Harness Engineering https://t.co/nz</description>
+    </item>
     <item>
       <title>AI Signal Briefing | 2026-03-29</title>
       <link>https://chill-sjy.github.io/news/reports/2026-03-29.html</link>

@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import importlib.util
+import os
 import sys
 from dataclasses import dataclass
 from pathlib import Path
@@ -14,6 +15,7 @@ from common import CONFIG_DIR, ROOT_DIR, load_yaml
 DATA_DIR = ROOT_DIR / "data" / "last30days"
 DB_PATH = DATA_DIR / "research.db"
 BRIEFS_DIR = DATA_DIR / "briefs"
+OUTPUT_DIR = DATA_DIR / "out"
 
 DAY_TO_CRON = {
     "monday": "1",
@@ -64,6 +66,8 @@ def load_runtime() -> Last30DaysRuntime:
 
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     BRIEFS_DIR.mkdir(parents=True, exist_ok=True)
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    os.environ.setdefault("LAST30DAYS_OUTPUT_DIR", str(OUTPUT_DIR))
 
     watchlist_module = _load_module("news_watchlist_local", scripts_dir / "watchlist.py")
     briefing_module = _load_module("news_briefing_local", scripts_dir / "briefing.py")

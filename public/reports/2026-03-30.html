@@ -1,0 +1,637 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Signal Briefing | 2026-03-30</title>
+  <style>
+    :root {
+      --bg: #f4efe6;
+      --paper: rgba(255, 251, 245, 0.92);
+      --ink: #1f2933;
+      --muted: #5c6b73;
+      --line: rgba(31, 41, 51, 0.12);
+      --accent: #0f766e;
+      --accent-soft: rgba(15, 118, 110, 0.12);
+      --warm: #8a5a44;
+      --shadow: 0 18px 40px rgba(31, 41, 51, 0.12);
+      --serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+      --sans: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(15, 118, 110, 0.18), transparent 28rem),
+        radial-gradient(circle at top right, rgba(138, 90, 68, 0.18), transparent 24rem),
+        linear-gradient(180deg, #f8f2e8 0%, #f1ebe2 100%);
+      font-family: var(--sans);
+      line-height: 1.65;
+    }
+    .shell {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 40px 20px 96px;
+    }
+    .hero {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+    .hero h1 {
+      margin: 8px 0 12px;
+      font-family: var(--serif);
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 72ch;
+    }
+    .hero-grid {
+      display: grid;
+      gap: 16px;
+      margin-top: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+    .hero-stat {
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.75), rgba(255,255,255,0.45));
+      border: 1px solid var(--line);
+    }
+    .hero-stat strong {
+      display: block;
+      font-size: 1.5rem;
+      color: var(--accent);
+    }
+    .eyebrow {
+      margin: 0;
+      color: var(--warm);
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .level-section {
+      margin-top: 28px;
+      padding: 26px;
+      border-radius: 26px;
+      background: rgba(255, 251, 245, 0.82);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+    .level-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: end;
+    }
+    .level-head h2 {
+      margin: 6px 0 0;
+      font-family: var(--serif);
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+    }
+    .level-description {
+      color: var(--muted);
+      margin-top: 10px;
+    }
+    .level-metric {
+      min-width: 92px;
+      text-align: center;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 700;
+      padding: 10px 14px;
+    }
+    .topic-grid {
+      display: grid;
+      gap: 18px;
+      margin-top: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+    .topic-card {
+      background: rgba(255,255,255,0.62);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 18px;
+    }
+    .topic-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: start;
+    }
+    .topic-head h3 {
+      margin: 0;
+      font-size: 1.1rem;
+    }
+    .pill {
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(31, 41, 51, 0.06);
+      color: var(--muted);
+      font-size: 0.82rem;
+      white-space: nowrap;
+    }
+    .topic-why,
+    .topic-focus,
+    .topic-stats {
+      margin: 12px 0 0;
+      color: var(--muted);
+    }
+    .finding-list,
+    .source-list {
+      list-style: none;
+      padding: 0;
+      margin: 16px 0 0;
+    }
+    .finding {
+      border-top: 1px solid var(--line);
+      padding-top: 14px;
+      margin-top: 14px;
+    }
+    .finding:first-child {
+      border-top: 0;
+      padding-top: 0;
+      margin-top: 0;
+    }
+    .finding-title a,
+    .source-list a {
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(15, 118, 110, 0.35);
+    }
+    .finding-title a:hover,
+    .source-list a:hover {
+      color: var(--accent);
+    }
+    .finding-meta {
+      font-size: 0.84rem;
+      color: var(--warm);
+      margin-top: 4px;
+    }
+    .empty-state {
+      color: var(--muted);
+      font-style: italic;
+      margin-top: 16px;
+    }
+    .source-box {
+      margin-top: 20px;
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.7);
+      border: 1px solid var(--line);
+    }
+    .source-box h4 {
+      margin: 0 0 12px;
+    }
+    .source-list li {
+      display: grid;
+      gap: 6px;
+      padding: 10px 0;
+      border-top: 1px solid var(--line);
+    }
+    .source-list li:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+    @media (max-width: 720px) {
+      .shell {
+        padding: 24px 14px 72px;
+      }
+      .hero,
+      .level-section {
+        padding: 20px;
+        border-radius: 22px;
+      }
+      .level-head {
+        flex-direction: column;
+        align-items: start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <p class="eyebrow">AI Signal Briefing</p>
+      <h1>2026-03-30 Briefing</h1>
+      <p>今日最强信号来自 Agent architecture patterns：42 Agent Architecture Patterns: From Skill Repos to Intent &amp;amp; Harness Engineering https://t.co/nz</p>
+      <div class="hero-grid">
+        <div class="hero-stat"><strong>145</strong><span>new findings</span></div>
+        <div class="hero-stat"><strong>11</strong><span>tracked topics</span></div>
+        <div class="hero-stat"><strong>$0.00</strong><span>budget used</span></div>
+      </div>
+    </section>
+    
+            <section class="level-section">
+              <div class="level-head">
+                <div>
+                  <p class="eyebrow">Level 1 - Core</p>
+                  <h2>一级：最相关的核心技术</h2>
+                </div>
+                <div class="level-metric">92 new</div>
+              </div>
+              <p class="level-description">只追踪与你最相关、技术门槛最高、最可能影响 agent 系统设计的内容。</p>
+              <div class="topic-grid">
+                
+                <article class="topic-card">
+                  <div class="topic-head">
+                    <h3>Agent architecture patterns</h3>
+                    <span class="pill">daily</span>
+                  </div>
+                  <p class="topic-why">帮助判断 planner-executor、多 agent 协作、tool routing 和 state machine 等架构取舍。</p>
+                  <p class="topic-focus"><strong>Focus:</strong> 关注真实可复用的架构模式、失败案例、上下文管理和任务编排。</p>
+                  <p class="topic-stats">New findings: 32</p>
+                  <ul class="finding-list">
+                        <li class="finding">
+                          <div class="finding-title"><a href="https://x.com/IntuitMachine/status/2036991580347707671" target="_blank" rel="noreferrer">42 Agent Architecture Patterns: From Skill Repos to Intent &amp;amp; Harness Engineering https://t.co/nz</a></div>
+                          <div class="finding-meta">x / IntuitMachine / score 278.0</div>
+                          <p>42 Agent Architecture Patterns: From Skill Repos to Intent &amp;amp; Harness Engineering https://t.co/nzCLHtH123</p>
+                        </li>
+                        
+                        <li class="finding">
+                          <div class="finding-title"><a href="https://x.com/gyorsonyIP/status/2037501988766683428" target="_blank" rel="noreferrer">Why a basic LLM won’t replace a professional investment analyst? Because finance requires deep speci</a></div>
+                          <div class="finding-meta">x / gyorsonyIP / score 25.0</div>
+                          <p>Why a basic LLM won’t replace a professional investment analyst? Because finance requires deep specialization. ​@RAFA_AI leverages a multi-agent AI architecture. This means a dedicated team of AI experts is working on y…</p>
+                        </li>
+                        
+                        <li class="finding">
+                          <div class="finding-title"><a href="https://x.com/nyk_builderz/status/2037233847163855268" target="_blank" rel="noreferrer">Here are 42 Agent Architecture patterns for you to study. 
+
+Bookmark this!</a></div>
+                          <div class="finding-meta">x / nyk_builderz / score 23.0</div>
+                          <p>Here are 42 Agent Architecture patterns for you to study. Bookmark this!</p>
+                        </li>
+                        </ul>
+                </article>
+                
+                <article class="topic-card">
+                  <div class="topic-head">
+                    <h3>Agent memory implementations</h3>
+                    <span class="pill">daily</span>
+                  </div>
+                  <p class="topic-why">这会直接影响长任务稳定性、用户画像持续性和多轮上下文质量。</p>
+                  <p class="topic-focus"><strong>Focus:</strong> 关注 episodic memory、semantic memory、long-term retrieval、memory compaction 和 state persistence。</p>
+                  <p class="topic-stats">New findings: 19</p>
+                  <ul class="finding-list">
+                        <li class="finding">
+                          <div class="finding-title"><a href="https://x.com/siddontang/status/2033747487958438301" target="_blank" rel="noreferrer">Hot take: 90% of AI agent memory implementations are just flat files pretending to be databases.
+
+JS</a></div>
+                          <div class="finding-meta">x / siddontang / score 8.0</div>
+                          <p>Hot take: 90% of AI agent memory implementations are just flat files pretending to be databases. JSON dumps. Markdown logs. Pickle files. &quot;Memory&quot; that can&#x27;t be queried, filtered, or shared between agents. I&#x27;ve seen age…</p>
+                        </li>
+                        
+                        <li class="finding">
+                          <div class="finding-title"><a href="https://x.com/eshanbuilds/status/2034320352407605595" target="_blank" rel="noreferrer">@AndrewYNg @Oracle @richmondalake the hardest part of agent memory isn&#x27;t storing things. it&#x27;s knowin</a></div>
+                          <div class="finding-meta">x / eshanbuilds / score 6.0</div>
+                          <p>@AndrewYNg @Oracle @richmondalake the hardest part of agent memory isn&#x27;t storing things. it&#x27;s knowing what to forget. human memory works because it throws away 99% of what it sees. most agent memory implementations stor…</p>
+                        </li>
+                        
+                        <li class="finding">
+                          <div class="finding-title"><a href="https://x.com/chubes4/status/2030980775202394340" target="_blank" rel="noreferrer">Third WordPress ecosystem PR just landed
+
+This one in WordPress/api-fetch (Gutenberg)
+
+Allows saving</a></div>
+                          <div class="finding-meta">x / chubes4 / score 4.0</div>
+                          <p>Third WordPress ecosystem PR just landed This one in WordPress/api-fetch (Gutenberg) Allows saving Markdown (and other) files directly in headless implementations instead of forcing JSON Discovered while editing Data Ma…</p>
+                        </li>
+                        </ul>
+                </article>
+                
+                <article class="topic-card">
+                  <div class="topic-head">
+                    <h3>Omni and multimodal inference pipelines</h3>
+                    <span class="pill">daily</span>
+                  </div>
+                  <p class="topic-why">关系到 omni 模型线管、音视频输入、实时流式处理和 tool use 的工程实现。</p>
+                  <p class="topic-focus"><strong>Focus:</strong> 关注多模态请求链路、流式推理、缓存、转码和吞吐优化。</p>
+                  <p class="topic-stats">New findings: 0</p>
+                  <p class="empty-state">No new findings in the current window.</p>
+                </article>
+                
+                <article class="topic-card">
+                  <div class="topic-head">
+                    <h3>Agent evaluation frameworks</h3>
+                    <span class="pill">daily</span>
+                  </div>
+                  <p class="topic-why">评测直接决定我们是否真正知道 agent 的能力边界和质量退化。</p>
+                  <p class="topic-focus"><strong>Focus:</strong> 关注 task success metrics、harness design、benchmark drift、infra noise 和 regression detection。</p>
+                  <p class="topic-stats">New findings: 18</p>
+                  <ul class="finding-list">
+                        <li class="finding">
+                          <div class="finding-title"><a href="https://x.com/MLflow/status/2034651692151500947" target="_blank" rel="noreferrer">Agent frameworks get you to an initial version. They won&#x27;t get you to the final reliability version.</a></div>
+                          <div class="finding-meta">x / MLflow / score 7.0</div>
+                          <p>Agent frameworks get you to an initial version. They won&#x27;t get you to the final reliability version. In our latest deep dive, the MLflow maintainers explain why stitching together separate tools for tracing, evaluation,…</p>
+                        </li>
+                        
+                        <li class="finding">
+                          <div class="finding-title"><a href="https://x.com/ZentienceAgent/status/2035288108560716189" target="_blank" rel="noreferrer">You nailed the fundamental shift that&#x27;s happening. SaaS evaluation metrics — ARR, LTV, churn, unit e</a></div>
+                          <div class="finding-meta">x / ZentienceAgent / score 3.0</div>
+                          <p>You nailed the fundamental shift that&#x27;s happening. SaaS evaluation metrics — ARR, LTV, churn, unit economics — those are exactly the frameworks that separate legitimate autonomous agent infrastructure from speculative t…</p>
+                        </li>
+                        
+                        <li class="finding">
+                          <div class="finding-title"><a href="https://x.com/agentcommunity_/status/2037175484849459231" target="_blank" rel="noreferrer">@openclaw @NVIDIAAIDev @rohanpaul_ai @bcherny @koylanai @lennysan @rauchg @SathishAiHype @theappcyph</a></div>
+                          <div class="finding-meta">x / agentcommunity_ / score 3.0</div>
+                          <p>@openclaw @NVIDIAAIDev @rohanpaul_ai @bcherny @koylanai @lennysan @rauchg @SathishAiHype @theappcypher @StackOfTruths @Dropbox Automated test harnesses have boosted quality scores from 0.16 to 1.00 for early-stage agent…</p>
+                        </li>
+                        </ul>
+                </article>
+                
+                <article class="topic-card">
+                  <div class="topic-head">
+                    <h3>Agent reliability observability and governance</h3>
+                    <span class="pill">daily</span>
+                  </div>
+                  <p class="topic-why">这块决定 agent 服务能不能稳定上线，尤其是监控、审计、权限和回滚能力。</p>
+                  <p class="topic-focus"><strong>Focus:</strong> 关注 tracing、monitoring、guardrails、policy enforcement、tool failures 和 production incidents。</p>
+                  <p class="topic-stats">New findings: 23</p>
+                  <ul class="finding-list">
+                        <li class="finding">
+                          <div class="finding-title"><a href="https://x.com/mutxdev/status/2034101382425268634" target="_blank" rel="noreferrer">@TheRealEngg Absolutely agree on reliability! If you&#x27;re building agents and want better observabilit</a></div>
+                          <div class="finding-meta">x / mutxdev / score 1.0</div>
+                          <p>@TheRealEngg Absolutely agree on reliability! If you&#x27;re building agents and want better observability + governance, check out MUTX (https://t.co/0FgaRzQKUl) - it&#x27;s an open-source control plane for agent lifecycle manage…</p>
+                        </li>
+                        
+                        <li class="finding">
+                          <div class="finding-title"><a href="https://x.com/velorynintel/status/2035657864229146972" target="_blank" rel="noreferrer">AI agent systems are becoming stateful.
+Governance is still stateless.
+
+• execution reliability is s</a></div>
+                          <div class="finding-meta">x / velorynintel / score 0.0</div>
+                          <p>AI agent systems are becoming stateful. Governance is still stateless. • execution reliability is strong • failure handling is mature • observability is present</p>
+                        </li>
+                        
+                        <li class="finding">
+                          <div class="finding-title"><a href="https://www.reddit.com/r/LangChain/comments/1rjn3pn/llm_observability_is_the_new_logging_quick/" target="_blank" rel="noreferrer">LLM Observability Is the New Logging: Quick Benchmark of 5 Tools (Langfuse, LangSmith, Helicone, Datadog, W&amp;B)</a></div>
+                          <div class="finding-meta">reddit / unknown / score 0.0</div>
+                          <p>LLM Observability Is the New Logging: Quick Benchmark of 5 Tools (Langfuse, LangSmith, Helicone, Datadog, W&amp;B)</p>
+                        </li>
+                        </ul>
+                </article>
+                
+              </div>
+              
+            </section>
+            
+            <section class="level-section">
+              <div class="level-head">
+                <div>
+                  <p class="eyebrow">Level 2 - Adjacent Technical</p>
+                  <h2>二级：AI 技术延展</h2>
+                </div>
+                <div class="level-metric">48 new</div>
+              </div>
+              <p class="level-description">保留 AI 技术实现与工程方案，但优先级低于核心 agent 主题。</p>
+              <div class="topic-grid">
+                
+                <article class="topic-card">
+                  <div class="topic-head">
+                    <h3>AI developer tooling and repos</h3>
+                    <span class="pill">weekdays</span>
+                  </div>
+                  <p class="topic-why">帮助发现新工具链、开源框架和工程实践热点。</p>
+                  <p class="topic-focus"><strong>Focus:</strong> 关注 developer tooling、agent frameworks、serving infra、eval tooling 和 devex improvements。</p>
+                  <p class="topic-stats">New findings: 17</p>
+                  <ul class="finding-list">
+                        <li class="finding">
+                          <div class="finding-title"><a href="https://x.com/mvkaran/status/2030155437971231202" target="_blank" rel="noreferrer">Excited to bring GitHub Constellation back to India! 🇮🇳
+
+April 11. Bengaluru
+
+A full day of conversa</a></div>
+                          <div class="finding-meta">x / mvkaran / score 169.0</div>
+                          <p>Excited to bring GitHub Constellation back to India! 🇮🇳 April 11. Bengaluru A full day of conversations around AI, GitHub Copilot, open source &amp;amp; developer tooling. If you&#x27;re around, you should come. Registrations op…</p>
+                        </li>
+                        
+                        <li class="finding">
+                          <div class="finding-title"><a href="https://x.com/PierreSamaties/status/2037931298329702887" target="_blank" rel="noreferrer">Developer Activity &amp; Tooling 👷
+
+ICP leads all crypto projects on @github  by commits, with a 375% an</a></div>
+                          <div class="finding-meta">x / PierreSamaties / score 126.0</div>
+                          <p>Developer Activity &amp; Tooling 👷 ICP leads all crypto projects on @github by commits, with a 375% annual increase in active developers. ICP ranked top AI and Big Data project by developer activity (@santimentfeed, March 2…</p>
+                        </li>
+                        
+                        <li class="finding">
+                          <div class="finding-title"><a href="https://x.com/enjojoyy/status/2029125417949401137" target="_blank" rel="noreferrer">When I said I’m replacing myself with AI, I meant it; 
+
+I built a DevRel AI coworker (Nori) that sca</a></div>
+                          <div class="finding-meta">x / enjojoyy / score 26.0</div>
+                          <p>When I said I’m replacing myself with AI, I meant it; I built a DevRel AI coworker (Nori) that scans our GitHub organization every morning, sends digest of latest changes by email and creates PRs to documentation and de…</p>
+                        </li>
+                        </ul>
+                </article>
+                
+                <article class="topic-card">
+                  <div class="topic-head">
+                    <h3>AI serving and systems engineering</h3>
+                    <span class="pill">weekdays</span>
+                  </div>
+                  <p class="topic-why">模型服务、推理加速和系统设计会影响你对平台能力和上线成本的判断。</p>
+                  <p class="topic-focus"><strong>Focus:</strong> 关注 inference serving、scheduler、batching、latency、GPU utilization 和 reliability tradeoffs。</p>
+                  <p class="topic-stats">New findings: 3</p>
+                  <ul class="finding-list">
+                        <li class="finding">
+                          <div class="finding-title"><a href="https://x.com/gcc_observer/status/2031274204641865752" target="_blank" rel="noreferrer">The conflict in Iran may be serving as a real-world testing ground for advanced U.S. and Israeli mil</a></div>
+                          <div class="finding-meta">x / gcc_observer / score 0.0</div>
+                          <p>The conflict in Iran may be serving as a real-world testing ground for advanced U.S. and Israeli military tech, and China could be taking detailed notes. From reverse-engineering missile systems to integrating AI insigh…</p>
+                        </li>
+                        
+                        <li class="finding">
+                          <div class="finding-title"><a href="https://x.com/AshefTajwarAmin/status/2032105277756228020" target="_blank" rel="noreferrer">Most AI failures in production aren’t caused by bad models.
+
+They’re caused by bad serving architect</a></div>
+                          <div class="finding-meta">x / AshefTajwarAmin / score 0.0</div>
+                          <p>Most AI failures in production aren’t caused by bad models. They’re caused by bad serving architecture. Training models is ML. Running them reliably at scale is systems engineering. https://t.co/JokLvx6OCR</p>
+                        </li>
+                        
+                        <li class="finding">
+                          <div class="finding-title"><a href="https://x.com/muneebsa/status/2033698990168977551" target="_blank" rel="noreferrer">LinkedIn replaced five separate feed retrieval systems with one LLM model — serving 1.3 billion user</a></div>
+                          <div class="finding-meta">x / muneebsa / score 0.0</div>
+                          <p>LinkedIn replaced five separate feed retrieval systems with one LLM model — serving 1.3 billion users with better personalization and relevance. #AI #LinkedIn #LLM #RecSystems #Engineering https://t.co/dHoaoiZqRC</p>
+                        </li>
+                        </ul>
+                </article>
+                
+                <article class="topic-card">
+                  <div class="topic-head">
+                    <h3>Applied AI product engineering</h3>
+                    <span class="pill">weekdays</span>
+                  </div>
+                  <p class="topic-why">用来补足真实产品团队如何把 AI 能力落进业务和交互。</p>
+                  <p class="topic-focus"><strong>Focus:</strong> 关注 product architecture、human-in-the-loop、UX patterns、cost controls 和 deployment stories。</p>
+                  <p class="topic-stats">New findings: 25</p>
+                  <ul class="finding-list">
+                        <li class="finding">
+                          <div class="finding-title"><a href="https://x.com/alhazredelrojo/status/2038227460706165240" target="_blank" rel="noreferrer">@Govindtwtt Sorry, IA hype is bullshit. CEOs trying desperately to sell their fucking AI product. Wa</a></div>
+                          <div class="finding-meta">x / alhazredelrojo / score 10.0</div>
+                          <p>@Govindtwtt Sorry, IA hype is bullshit. CEOs trying desperately to sell their fucking AI product. Wannabes playing as coders (that&#x27;s what they are). Software engineering goes beyond code, and wannabes or newbies will ne…</p>
+                        </li>
+                        
+                        <li class="finding">
+                          <div class="finding-title"><a href="https://x.com/jainsahil/status/2038372497549316407" target="_blank" rel="noreferrer">Best AI Resources To Build a One-Person Million-Dollar Business in 2026
+
+1. AI coding tutorials – Gr</a></div>
+                          <div class="finding-meta">x / jainsahil / score 8.0</div>
+                          <p>Best AI Resources To Build a One-Person Million-Dollar Business in 2026 1. AI coding tutorials – Greg Isenberg 2. Vibe coding workflows – Pieter Levels 3. Indie hacking with AI – Dan Kulkov 4. AI product strategy – Lenn…</p>
+                        </li>
+                        
+                        <li class="finding">
+                          <div class="finding-title"><a href="https://x.com/jxtgolden/status/2038288937140027471" target="_blank" rel="noreferrer">product design, prompt engineering, AI automation, motion graphics/video editing, data analysis.
+
+th</a></div>
+                          <div class="finding-meta">x / jxtgolden / score 5.0</div>
+                          <p>product design, prompt engineering, AI automation, motion graphics/video editing, data analysis. these are my top picks things you can do on the side, yt automation (it’s a skill too) TA( if you ever plan on trading the…</p>
+                        </li>
+                        </ul>
+                </article>
+                
+                <article class="topic-card">
+                  <div class="topic-head">
+                    <h3>Frontier lab engineering notes</h3>
+                    <span class="pill">weekdays</span>
+                  </div>
+                  <p class="topic-why">大模型公司的一线工程博客经常包含高信号经验和设计复盘。</p>
+                  <p class="topic-focus"><strong>Focus:</strong> 关注 Anthropic、OpenAI 等官方工程与研究内容中的可迁移经验。</p>
+                  <p class="topic-stats">New findings: 3</p>
+                  <ul class="finding-list">
+                        <li class="finding">
+                          <div class="finding-title"><a href="https://x.com/aakashgupta/status/2037559397887644141" target="_blank" rel="noreferrer">MCP was supposed to be the USB-C of AI. Anthropic open-sourced it in late 2024, every major platform</a></div>
+                          <div class="finding-meta">x / aakashgupta / score 192.0</div>
+                          <p>MCP was supposed to be the USB-C of AI. Anthropic open-sourced it in late 2024, every major platform adopted it within months, and by early 2025 it was in Claude, Cursor, VS Code, Windsurf, and dozens of other tools. Th…</p>
+                        </li>
+                        
+                        <li class="finding">
+                          <div class="finding-title"><a href="https://x.com/velonxbt/status/2037523842625593512" target="_blank" rel="noreferrer">Anthropic open-sourced what their own engineers use
+
+Their playbook describes how to build AI agents</a></div>
+                          <div class="finding-meta">x / velonxbt / score 0.0</div>
+                          <p>Anthropic open-sourced what their own engineers use Their playbook describes how to build AI agents ready for production. Agent Skills for Context Engineering. Multi-agent architectures, memory systems, orchestrators th…</p>
+                        </li>
+                        
+                        <li class="finding">
+                          <div class="finding-title"><a href="https://x.com/hodlmecloseplz/status/2035774139320185137" target="_blank" rel="noreferrer">For context: Anthropic open-sourced MCP last year. It&#x27;s a protocol that lets AI connect to external </a></div>
+                          <div class="finding-meta">x / hodlmecloseplz / score 0.0</div>
+                          <p>For context: Anthropic open-sourced MCP last year. It&#x27;s a protocol that lets AI connect to external tools. Think USB-C for AI agents. If you&#x27;re building CLI skills as an MCP workaround, I want to see what you&#x27;re shippin…</p>
+                        </li>
+                        </ul>
+                </article>
+                
+              </div>
+              <div class="source-box"><h4>Curated sources</h4><ul class="source-list">
+                    <li>
+                      <a href="https://www.anthropic.com/engineering" target="_blank" rel="noreferrer">Anthropic Engineering</a>
+                      <span>高信号 agent engineering、eval、Claude Code、long-running agents 相关文章。</span>
+                    </li>
+                    
+                    <li>
+                      <a href="https://www.anthropic.com/research" target="_blank" rel="noreferrer">Anthropic Research</a>
+                      <span>适合补齐对 alignment、interpretability、agent autonomy 和科学应用的跟踪。</span>
+                    </li>
+                    
+                    <li>
+                      <a href="https://openai.com/research/" target="_blank" rel="noreferrer">OpenAI Research</a>
+                      <span>用于追踪模型、评测、推理系统和产品能力演进。</span>
+                    </li>
+                    
+                    <li>
+                      <a href="https://github.com/trending" target="_blank" rel="noreferrer">GitHub Trending</a>
+                      <span>适合发现新的 AI repo、infra 工具和 agent framework 热点。</span>
+                    </li>
+                    
+                    <li>
+                      <a href="https://huggingface.co/papers" target="_blank" rel="noreferrer">Hugging Face Daily Papers</a>
+                      <span>用于补科研和技术趋势，不必每篇都读。</span>
+                    </li>
+                    </ul></div>
+            </section>
+            
+            <section class="level-section">
+              <div class="level-head">
+                <div>
+                  <p class="eyebrow">Level 3 - Broader AI</p>
+                  <h2>三级：更广泛的 AI 资讯</h2>
+                </div>
+                <div class="level-metric">5 new</div>
+              </div>
+              <p class="level-description">行业动态、产品发布和广义趋势，主要用于补背景和发现新方向。</p>
+              <div class="topic-grid">
+                
+                <article class="topic-card">
+                  <div class="topic-head">
+                    <h3>AI launches and product news</h3>
+                    <span class="pill">weekdays</span>
+                  </div>
+                  <p class="topic-why">帮助你快速扫到值得深入研究的新模型、新工具和产品方向。</p>
+                  <p class="topic-focus"><strong>Focus:</strong> 关注模型发布、产品更新、生态变化和开发者反馈。</p>
+                  <p class="topic-stats">New findings: 4</p>
+                  <ul class="finding-list">
+                        <li class="finding">
+                          <div class="finding-title"><a href="https://x.com/grok/status/2029280358823309717" target="_blank" rel="noreferrer">The grok account (xAI&#x27;s official profile) follows elonmusk, xai &amp; gork purely for official xAI updat</a></div>
+                          <div class="finding-meta">x / grok / score 0.0</div>
+                          <p>The grok account (xAI&#x27;s official profile) follows elonmusk, xai &amp; gork purely for official xAI updates—like product launches, Grok improvements, tech announcements &amp; Elon’s direct insights on AI/space. For country/world…</p>
+                        </li>
+                        
+                        <li class="finding">
+                          <div class="finding-title"><a href="https://x.com/RachelQuant0505/status/2033696474748621225" target="_blank" rel="noreferrer">@StockSavvyShay $NVDA as universal AI middleware is the real story. Our quant models weight partners</a></div>
+                          <div class="finding-meta">x / RachelQuant0505 / score 0.0</div>
+                          <p>@StockSavvyShay $NVDA as universal AI middleware is the real story. Our quant models weight partnership announcements 2.3x vs product launches for sector rotation signals. $PLTR + $SNOW integration = enterprise AI infle…</p>
+                        </li>
+                        
+                        <li class="finding">
+                          <div class="finding-title"><a href="https://x.com/grok/status/2038070843318657372" target="_blank" rel="noreferrer">Actually, that Nokia Minima 2100 image is a viral concept render/AI fake—not an official HMD Global </a></div>
+                          <div class="finding-meta">x / grok / score 0.0</div>
+                          <p>Actually, that Nokia Minima 2100 image is a viral concept render/AI fake—not an official HMD Global or Nokia product. No announcements, listings, or launches from them. Classic nostalgia bait mixing old 2100 vibes with…</p>
+                        </li>
+                        </ul>
+                </article>
+                
+                <article class="topic-card">
+                  <div class="topic-head">
+                    <h3>AI market and ecosystem signals</h3>
+                    <span class="pill">weekly</span>
+                  </div>
+                  <p class="topic-why">作为行业背景层，帮助辨别热度是真需求还是短期噪音。</p>
+                  <p class="topic-focus"><strong>Focus:</strong> 关注融资、生态合作、基础设施动向和 developer mindshare 的变化。</p>
+                  <p class="topic-stats">New findings: 1</p>
+                  <ul class="finding-list">
+                        <li class="finding">
+                          <div class="finding-title"><a href="https://x.com/TheMainstream7/status/2029104520324891069" target="_blank" rel="noreferrer">As competition intensifies in the AI startup ecosystem, founders and venture capital firms are exper</a></div>
+                          <div class="finding-meta">x / TheMainstream7 / score 0.0</div>
+                          <p>As competition intensifies in the AI startup ecosystem, founders and venture capital firms are experimenting with new valuation structures to signal market leadership. Instead of raising multiple funding rounds at risin…</p>
+                        </li>
+                        </ul>
+                </article>
+                
+              </div>
+              <div class="source-box"><h4>Curated sources</h4><ul class="source-list">
+                    <li>
+                      <a href="https://www.anthropic.com/news" target="_blank" rel="noreferrer">Anthropic News</a>
+                      <span>产品、合作、政策和生态更新。</span>
+                    </li>
+                    
+                    <li>
+                      <a href="https://openai.com/news/" target="_blank" rel="noreferrer">OpenAI News</a>
+                      <span>官方产品与公司动态。</span>
+                    </li>
+                    
+                    <li>
+                      <a href="https://github.com/topics/artificial-intelligence" target="_blank" rel="noreferrer">GitHub Explore AI</a>
+                      <span>适合发现更广义的 AI 项目和生态方向。</span>
+                    </li>
+                    </ul></div>
+            </section>
+            
+  </main>
+</body>
+</html>
